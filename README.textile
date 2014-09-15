@@ -1,0 +1,21 @@
+!http://chattycrow.com/crow3logo.png!
+
+h1. ChattyCrow - Errbit library
+
+This library is usefull to send error messages from errbit to chatty crow channels!
+
+h2. Installation
+
+<pre>
+# Gemfile in errbit!
+gem 'chatty_crow', '~> 1.0.0', github: 'netbrick/chattycrow_ruby'
+gem 'chatty_crow_errbit', '~> 1.0.0', github: 'netbrick/chattycrow_errbit'
+bundle install
+
+# app/assets/stylesheets/application.css.erb
+*= require chatty_crow
+</pre>
+
+h2. Configuration in Errbit
+
+Simple set token for channel, token for application and contacts (you can also manage contacts in administration of chattycrow).
