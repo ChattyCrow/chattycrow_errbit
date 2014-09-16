@@ -33,7 +33,8 @@ module ChattyCrowErrbit
       # Set URL
       # TODO: Modify in gem!
       ChattyCrow.configure do |config|
-        config.host = service_url
+        config.host  = service_url
+        config.token = api_token
       end
 
       # Send message!
