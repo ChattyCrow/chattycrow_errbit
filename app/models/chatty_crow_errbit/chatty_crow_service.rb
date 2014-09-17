@@ -44,9 +44,15 @@ module ChattyCrowErrbit
     private
 
     def message(problem)
-      """#{problem.app.name}
-      #{Errbit::Config.protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
-      #{notification_description problem}"""
+      <<-MESSAGE
+        #{problem.app.name}
+        #{config_protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
+        #{notification_description problem}
+      MESSAGE
+    end
+
+    def config_protocol
+      Errbit::Config.protocol || 'http'
     end
   end
 end
