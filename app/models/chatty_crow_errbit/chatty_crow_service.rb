@@ -10,7 +10,7 @@ module ChattyCrowErrbit
       [:service, { placeholder: "#{SERVICES.join(', ')}", label: "Service (valid options: #{SERVICES.join(', ')})" }],
       [:api_token, { placeholder: 'Application token', label: 'APP Token' }],
       [:sender_name, { placeholder: 'Channel token', label: 'Channel Token' }],
-      [:room_id, { placeholder: 'test@jabbim.com, test2@jabbim.com', label: 'Contacts separated by comma' }]
+      [:user_id, { placeholder: 'test@jabbim.com, test2@jabbim.com', label: 'Contacts separated by comma' }]
     ]
 
     def check_params
@@ -28,7 +28,7 @@ module ChattyCrowErrbit
       m = message(problem)
 
       # Contacts?
-      contacts = room_id.blank? ? nil : room_id.split(', ')
+      contacts = user_id.blank? ? nil : user_id.gsub(/;/i, ",").split(",").map(&:strip).reject(&:empty?)
 
       # Set URL
       # TODO: Modify in gem!
