@@ -5,11 +5,16 @@ require 'chatty_crow_errbit/version'
 Gem::Specification.new do |s|
   s.name        = 'chatty_crow_errbit'
   s.version     = ChattyCrowErrbit::VERSION
-  s.authors     = %w(NetBrick Strnadj)
-  s.email       = %w(support@netbrick.cz)
-  s.homepage    = 'http://chattycrow.com/'
-
+  s.description = 'Extension for errbit error handler to send messages via chatty crow'
   s.files = Dir['{app,config,db,lib}/**/*'] +
             ['MIT-LICENSE', 'Rakefile', 'README.textile']
   s.test_files = Dir['test/**/*']
+
+  s.add_runtime_dependency('chatty_crow', '>= 1.2.1')
+
+  s.authors = ['Netbrick s.r.o.']
+  s.email   = ['support@netbrick.eu', 'info@chattycrow.com']
+  s.homepage = 'http://www.chattycrow.com'
+
+  s.platform = Gem::Platform::RUBY
 end

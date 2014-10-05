@@ -1,3 +1,5 @@
+require 'chatty_crow'
+
 module ChattyCrowErrbit
   # Chatty crow notification service for Errbit
   class ChattyCrowService < ::NotificationService
@@ -25,23 +27,39 @@ module ChattyCrowErrbit
 
     def create_notification(problem)
       # Get message for problem
-      m = message(problem)
+      payload = payload(problem)
 
       # Contacts?
       contacts = user_id.blank? ? nil : user_id.gsub(/;/i, ",").split(",").map(&:strip).reject(&:empty?)
 
       # Set URL
-      # TODO: Modify in gem!
-      ChattyCrow.configure do |config|
+      ::ChattyCrow.configure do |config|
         config.host  = service_url
-        config.token = api_token
       end
 
       # Send message!
-      ChattyCrow.send("send_#{service.downcase}", m, channel: sender_name, contacts: contacts)
+      if payload.is_a?(Hash)
+        ::ChattyCrow.send("send_#{service.downcase}", payload.merge(channel: sender_name, contacts: contacts, token: api_token))
+      else
+        ::ChattyCrow.send("send_#{service.downcase}", payload, channel: sender_name, contacts: contacts, token: api_token)
+      end
     end
 
     private
+
+    def payload(problem)
+      res = message(problem)
+      case service.downcase
+      when 'android'
+        res = { payload: { data: { alert: res } } }
+      when 'ios'
+        res = { payload: { aps: { alert: res } } }
+      when 'mail'
+        res = { html_body: res, subject: "Problem #{problem.app.name}" }
+      end
+
+      res
+    end
 
     def message(problem)
       <<-MESSAGE
