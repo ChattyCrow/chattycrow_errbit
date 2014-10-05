@@ -8,7 +8,7 @@ h2. Installation
 
 <pre>
 # Gemfile in errbit!
-gem 'chatty_crow', '~> 1.0.0', github: 'netbrick/chattycrow_ruby'
+gem 'chatty_crow', '~> 1.2.0'
 gem 'chatty_crow_errbit', '~> 1.0.0', github: 'netbrick/chattycrow_errbit'
 bundle install
 
