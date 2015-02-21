@@ -63,9 +63,9 @@ module ChattyCrowErrbit
 
     def message(problem)
       <<-MESSAGE
-        #{problem.app.name}
-        #{config_protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
-        #{notification_description problem}
+      #{problem.app.name}
+      #{config_protocol}://#{Errbit::Config.host}/apps/#{problem.app.id}
+      #{notification_description problem}
       MESSAGE
     end
 
